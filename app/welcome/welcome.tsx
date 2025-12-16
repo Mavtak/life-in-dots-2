@@ -1,7 +1,7 @@
-export function Welcome() {
+export const Welcome = () => {
   return (
     <main>
       life in dots
     </main>
   );
-}
+};
