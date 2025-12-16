@@ -32,5 +32,12 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       'no-empty-pattern': 'off',
     },
-  }
+  },
+  {
+    rules: {
+      'indent': ['error', 2],
+      'no-trailing-spaces': ['error'],
+      'semi': ['error', 'always'],
+    },
+  },
 ]);

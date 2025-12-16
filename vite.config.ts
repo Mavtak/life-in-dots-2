@@ -8,6 +8,7 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
     eslint({
+      fix: true,
       lintOnStart: true,
     }),
   ],
