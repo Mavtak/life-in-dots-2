@@ -25,4 +25,10 @@ export default defineConfig([
     '.react-router/',
     'build/',
   ]),
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      'no-empty-pattern': 'off',
+    },
+  }
 ]);
