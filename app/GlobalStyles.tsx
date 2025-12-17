@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-family: sans-serif;
     scroll-behavior: smooth;
+    
+    background-color: #160025;
   }
 `;
 
