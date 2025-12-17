@@ -1,14 +1,27 @@
-import styled from "styled-components";
-
-const Title = styled.h1`
-  margin: 20px;
-  text-align: center;
-`;
+import moment from "moment";
+import { useMemo } from "react";
+import getPosterData from "./getPosterData";
+import Poster from "./Poster";
 
 const Page = () => {
+  const posterData = useMemo(() => {
+    const birthday = moment('1989-10-05');
+    const name = 'David';
+    const now = moment();
+
+    const result =  getPosterData({
+      birthday,
+      maxAge: 90,
+      now,
+      name,
+    });
+
+    return result;
+  }, []);
+
   return (
     <main>
-      <Title>Life In Dots</Title>
+      <Poster data={posterData} />
     </main>
   );
 };
