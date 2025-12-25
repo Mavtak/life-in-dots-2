@@ -43,10 +43,10 @@ The following is default documentation from `create-react-router`, which I used 
 To build and run using Docker:
 
 ```bash
-docker build -t my-app .
+docker build -t life-in-dots .
 
 # Run the container
-docker run -p 3000:3000 my-app
+docker run -p 3000:3000 life-in-dots
 ```
 
 The containerized application can be deployed to any platform that supports Docker, including:
