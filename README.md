@@ -1,18 +1,10 @@
-# Welcome to React Router!
+# Life in Dots!
 
-A modern, production-ready template for building full-stack React applications using React Router.
+See your life represented as a finite sequence of dots. How fun!
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+I made this project largely to practice creating something, anything from scratch. Check out the pull requests to get a feel for my development style.  It's also a nice plce for me to thinker and try new things. And of course, it's also an art project that I find pretty interesting. I have big aspirations for where it will go. We'll see how many of my dots get crossed out in the meantime...
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Hosted at https://davidmcgrath.com/life-in-dots
 
 ## Getting Started
 
@@ -32,7 +24,7 @@ Start the development server with HMR:
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+In a web browser, navigate  to `http://localhost:5173`.
 
 ## Building for Production
 
@@ -43,6 +35,8 @@ npm run build
 ```
 
 ## Deployment
+
+The following is default documentation from `create-react-router`, which I used to initialize the project.
 
 ### Docker Deployment
 
@@ -77,11 +71,3 @@ Make sure to deploy the output of `npm run build`
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
