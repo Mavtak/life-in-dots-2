@@ -7,7 +7,6 @@ const Container = styled.div`
   flex-wrap: wrap;
   
   background-color: white;
-  color: black;
   padding: 12px;
   border-radius: 24px;
 `;
