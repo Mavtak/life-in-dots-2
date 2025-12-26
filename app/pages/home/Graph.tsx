@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import type { GraphEntry } from './getPosterData';
-import GraphSegment from './GraphSegment';
+import GraphSegment, { sizePx } from './GraphSegment';
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,  minmax(${sizePx}px, 1fr));
   
   background-color: white;
   padding: 12px;
