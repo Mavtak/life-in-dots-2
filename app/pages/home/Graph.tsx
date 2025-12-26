@@ -6,7 +6,6 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   
-  border: 1px solid black;
   background-color: white;
   color: black;
   padding: 12px;
