@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import type { GraphEntry } from './getPosterData';
 
+export const sizePx = 12;
+
 const Container = styled.div<{
   data: GraphEntry
 }>`
@@ -8,14 +10,35 @@ const Container = styled.div<{
   align-items: center;
   justify-content: center;
 
-  --size: 14px;
+  --size: ${sizePx}px;
 
   width: var(--size);
   height: var(--size);
   font-size: var(--size);
 
-  ${({data}) => data.hasPassed && `
+  ${({data}) => data.isBirthWeek && `
     font-weight: 700;
+  `}
+
+  ${({data}) => !data.isBirthWeek && `
+    font-size: calc(var(--size) * 2);
+  `}
+
+  ${({data}) => data.hasPassed && !data.isBirthWeek && `
+    color: #aaaaaa;
+
+  `}
+  
+  ${({data}) => data.hasPassed && data.isBirthWeek && `
+    color: #555555;
+  `}
+
+  ${({data}) =>  !data.hasPassed  && !data.isBirthWeek && `
+    color: #444444;
+  `}
+
+  ${({data}) =>  !data.hasPassed  && data.isBirthWeek && `
+    color: #000000
   `}
 `;
 
