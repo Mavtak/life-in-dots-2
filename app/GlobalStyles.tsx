@@ -15,6 +15,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
     padding: 25px;
   }
 `;
