@@ -13,6 +13,10 @@ const GlobalStyles = createGlobalStyle`
     
     background-color: #160025;
   }
+
+  body {
+    padding: 25px;
+  }
 `;
 
 export default GlobalStyles;
