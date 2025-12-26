@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import type { GraphEntry } from './getPosterData';
 
+export const sizePx = 12;
+
 const Container = styled.div<{
   data: GraphEntry
 }>`
@@ -8,7 +10,7 @@ const Container = styled.div<{
   align-items: center;
   justify-content: center;
 
-  --size: 12px;
+  --size: ${sizePx}px;
 
   width: var(--size);
   height: var(--size);
