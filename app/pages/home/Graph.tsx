@@ -9,8 +9,8 @@ const Container = styled.div`
   border: 1px solid black;
   background-color: white;
   color: black;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 12px;
+  border-radius: 24px;
 `;
 
 type Props = {
