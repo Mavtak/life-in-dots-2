@@ -17,18 +17,20 @@ type Props = {
 };
 
 const Graph = ({data}: Props) => {
+  const renderGraphSegment = (entry: GraphEntry) => {
+    return (
+      <GraphSegment
+        data={entry}
+        isSelected={false}
+        key={entry.weekNumber}
+      />
+    );
+  };
+
   return (
     <Container>
       {
-        data.map((entry) => {
-          return (
-            <GraphSegment
-              data={entry}
-              isSelected={false}
-              key={entry.weekNumber}
-            />
-          );
-        })
+        data.map(renderGraphSegment)
       }
     </Container>
   );
