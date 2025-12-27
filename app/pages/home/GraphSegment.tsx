@@ -38,13 +38,13 @@ const Container = styled.div<{
   `}
 
   ${({data}) =>  !data.hasPassed  && data.isBirthWeek && `
-    color: #000000
+    color: #000000;
   `}
 `;
 
 type Props = {
   data: GraphEntry,
-}
+};
 
 const GraphSegment = ({data}: Props) => {
   const renderValue = () => {
