@@ -11,6 +11,8 @@ const Container = styled.div<{
   align-items: center;
   justify-content: center;
 
+  user-select: none;
+
   --size: ${sizePx}px;
 
   width: var(--size);
