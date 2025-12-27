@@ -24,6 +24,7 @@ const Graph = ({data}: Props) => {
           return (
             <GraphSegment
               data={entry}
+              isSelected={false}
               key={entry.weekNumber}
             />
           );

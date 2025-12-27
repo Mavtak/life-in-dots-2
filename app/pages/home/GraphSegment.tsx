@@ -4,7 +4,8 @@ import type { GraphEntry } from './getPosterData';
 export const sizePx = 12;
 
 const Container = styled.div<{
-  data: GraphEntry
+  data: GraphEntry,
+  isSelected: boolean,
 }>`
   display: flex;
   align-items: center;
@@ -40,13 +41,21 @@ const Container = styled.div<{
   ${({data}) =>  !data.hasPassed  && data.isBirthWeek && `
     color: #000000;
   `}
+
+  ${({isSelected}) => isSelected && `
+    background-color: orangered;
+  `}
 `;
 
 type Props = {
   data: GraphEntry,
+  isSelected: boolean,
 };
 
-const GraphSegment = ({data}: Props) => {
+const GraphSegment = ({
+  data,
+  isSelected,
+}: Props) => {
   const renderValue = () => {
     if (data.isBirthWeek) {
       return String(data.age);
@@ -60,7 +69,10 @@ const GraphSegment = ({data}: Props) => {
   };
 
   return (
-    <Container data={data} >
+    <Container
+      data={data}
+      isSelected={isSelected}
+    >
       {renderValue()}
     </Container>
   );
