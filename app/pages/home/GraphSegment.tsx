@@ -29,7 +29,7 @@ const Container = styled.div<{
 
   ${({data}) => data.hasPassed && !data.isBirthWeek && `
     color: #aaaaaa;
-
+    font-size: calc(var(--size) * 1.5);
   `}
   
   ${({data}) => data.hasPassed && data.isBirthWeek && `
