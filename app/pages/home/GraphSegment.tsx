@@ -52,11 +52,15 @@ const Container = styled.div<{
 type Props = {
   data: GraphEntry,
   isSelected: boolean,
+  onSelectionContinue: () => void,
+  onSelectionStart: () => void,
 };
 
 const GraphSegment = ({
   data,
   isSelected,
+  onSelectionContinue,
+  onSelectionStart,
 }: Props) => {
   const renderValue = () => {
     if (data.isBirthWeek) {
@@ -74,6 +78,8 @@ const GraphSegment = ({
     <Container
       data={data}
       isSelected={isSelected}
+      onPointerDown={onSelectionStart}
+      onPointerEnter={onSelectionContinue}
     >
       {renderValue()}
     </Container>
