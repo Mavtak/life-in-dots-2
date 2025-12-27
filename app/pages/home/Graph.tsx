@@ -22,7 +22,10 @@ const Graph = ({data}: Props) => {
       {
         data.map((entry) => {
           return (
-            <GraphSegment key={entry.weekNumber} data={entry} />
+            <GraphSegment
+              data={entry}
+              key={entry.weekNumber}
+            />
           );
         })
       }
