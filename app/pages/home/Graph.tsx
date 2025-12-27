@@ -3,7 +3,7 @@ import type { GraphEntry } from './getPosterData';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
 
 const Container = styled.div`
-  width: 100%;
+  width: round(down, 100%, ${graphSegmentSizePx}px);
   display: grid;
   grid-template-columns: repeat(auto-fill,  minmax(${graphSegmentSizePx}px, 1fr));
   
