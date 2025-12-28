@@ -3,12 +3,21 @@ import type { GraphEntry } from './getPosterData';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
 
 const Container = styled.div`
-  width: round(down, 100%, ${graphSegmentSizePx}px);
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill,  minmax(${graphSegmentSizePx}px, 1fr));
   
   background-color: white;
   padding: 12px;
+
+  --extra-side-padding: calc(
+    100%
+    - round(down, 100% - 12px*2, ${graphSegmentSizePx}px)
+  );
+
+  padding-left: calc(var(--extra-side-padding) / 2);
+  padding-right: calc(var(--extra-side-padding) / 2);
+
   border-radius: 24px;
 `;
 
