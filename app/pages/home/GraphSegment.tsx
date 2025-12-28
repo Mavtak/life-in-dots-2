@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import type { GraphEntry } from './getPosterData';
+import { useCallback, useRef, type PointerEventHandler } from 'react';
 
 export const sizePx = 12;
 
 const Container = styled.div<{
-  data: GraphEntry
+  data: GraphEntry,
+  isSelected: boolean,
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  touch-action: none;
+  user-select: none;
 
   --size: ${sizePx}px;
 
@@ -26,7 +31,7 @@ const Container = styled.div<{
 
   ${({data}) => data.hasPassed && !data.isBirthWeek && `
     color: #aaaaaa;
-
+    font-size: calc(var(--size) * 1.5);
   `}
   
   ${({data}) => data.hasPassed && data.isBirthWeek && `
@@ -38,15 +43,35 @@ const Container = styled.div<{
   `}
 
   ${({data}) =>  !data.hasPassed  && data.isBirthWeek && `
-    color: #000000
+    color: #000000;
+  `}
+
+  ${({isSelected}) => isSelected && `
+    background-color: orangered;
   `}
 `;
 
 type Props = {
   data: GraphEntry,
-}
+  isSelected: boolean,
+  onSelectionContinue: () => void,
+  onSelectionStart: () => void,
+};
 
-const GraphSegment = ({data}: Props) => {
+const GraphSegment = ({
+  data,
+  isSelected,
+  onSelectionContinue,
+  onSelectionStart,
+}: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handlePointerDown: PointerEventHandler<HTMLDivElement> = useCallback((event) => {
+    containerRef?.current?.releasePointerCapture(event.pointerId);
+
+    onSelectionStart();
+  }, [onSelectionStart]);
+
   const renderValue = () => {
     if (data.isBirthWeek) {
       return String(data.age);
@@ -60,7 +85,13 @@ const GraphSegment = ({data}: Props) => {
   };
 
   return (
-    <Container data={data} >
+    <Container
+      data={data}
+      isSelected={isSelected}
+      onPointerMove={onSelectionContinue}
+      onPointerDown={handlePointerDown}
+      ref={containerRef}
+    >
       {renderValue()}
     </Container>
   );
