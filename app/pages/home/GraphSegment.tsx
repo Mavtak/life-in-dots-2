@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import type { GraphEntry } from './getPosterData';
+import { useCallback, useRef, type PointerEventHandler } from 'react';
 
 export const sizePx = 12;
 
@@ -11,6 +12,7 @@ const Container = styled.div<{
   align-items: center;
   justify-content: center;
 
+  touch-action: none;
   user-select: none;
 
   --size: ${sizePx}px;
@@ -52,12 +54,24 @@ const Container = styled.div<{
 type Props = {
   data: GraphEntry,
   isSelected: boolean,
+  onSelectionContinue: () => void,
+  onSelectionStart: () => void,
 };
 
 const GraphSegment = ({
   data,
   isSelected,
+  onSelectionContinue,
+  onSelectionStart,
 }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handlePointerDown: PointerEventHandler<HTMLDivElement> = useCallback((event) => {
+    containerRef?.current?.releasePointerCapture(event.pointerId);
+
+    onSelectionStart();
+  }, [onSelectionStart]);
+
   const renderValue = () => {
     if (data.isBirthWeek) {
       return String(data.age);
@@ -74,6 +88,9 @@ const GraphSegment = ({
     <Container
       data={data}
       isSelected={isSelected}
+      onPointerMove={onSelectionContinue}
+      onPointerDown={handlePointerDown}
+      ref={containerRef}
     >
       {renderValue()}
     </Container>
