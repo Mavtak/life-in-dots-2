@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import type { GraphEntry } from './getPosterData';
+import type GraphEntry from './GraphEntry';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
 
 const Container = styled.div`

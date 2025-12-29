@@ -1,23 +1,12 @@
 import moment, { type Moment } from "moment";
+import type PosterData from "./PosterData";
+import type GraphEntry from "./GraphEntry";
 
 type Input = {
   birthday: Moment;
   maxAge: number,
   name: string;
   now: Moment;
-};
-
-export type GraphEntry = {
-  age: number;
-  hasPassed: boolean;
-  isBirthWeek: boolean;
-  weekNumber: number;
-};
-
-export type PosterData = {
-  birthday: Moment;
-  graphData: GraphEntry[];
-  name: string;
 };
 
 const getLifeInDotsData = ({

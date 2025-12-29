@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import type { GraphEntry } from './getPosterData';
 import { useCallback, useRef, type PointerEventHandler } from 'react';
+import styled from 'styled-components';
+import type GraphEntry from './GraphEntry';
 
 export const sizePx = 12;
 
