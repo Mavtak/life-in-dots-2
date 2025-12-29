@@ -1,7 +1,26 @@
 import moment from "moment";
-import { useState } from "react";
+import useStoredState from "~/utils/useStoredState";
 import getPosterData from "./getPosterData";
 import Poster from "./Poster";
+import type PosterData from "./PosterData";
+
+const convertPosterDataFromDeserializedValue = (deserializedValue: any) => {
+  const result: PosterData = {
+    ...deserializedValue,
+    birthday: moment(deserializedValue.birthday),
+  };
+
+  return result;
+};
+
+const convertPosterDataToSerializableValue = (posterData: PosterData) => {
+  const result: any = {
+    ...posterData,
+    birthday: posterData.birthday.format(),
+  };
+
+  return result;
+};
 
 const getDefaultPosterData = () => {
   const birthday = moment('1989-10-05');
@@ -19,7 +38,12 @@ const getDefaultPosterData = () => {
 };
 
 const Page = () => {
-  const [posterData, setPosterData] = useState(getDefaultPosterData);
+  const [posterData, setPosterData] = useStoredState({
+    convertFromDeserializedValue: convertPosterDataFromDeserializedValue,
+    convertToSerializableValue: convertPosterDataToSerializableValue,
+    getDefaultValue: getDefaultPosterData,
+    key: 'poster-data',
+  });
 
   return (
     <main>
