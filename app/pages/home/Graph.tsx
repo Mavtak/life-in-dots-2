@@ -25,10 +25,10 @@ const Container = styled.div`
 `;
 
 type Props = {
-  data: PosterData;
+  value: PosterData;
 };
 
-const Graph = ({data}: Props) => {
+const Graph = ({value}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [selection, setSelection] = useState<Selection | null>(null);
@@ -105,7 +105,7 @@ const Graph = ({data}: Props) => {
   return (
     <Container ref={containerRef}>
       {
-        data.graphData.map(renderGraphSegment)
+        value.graphData.map(renderGraphSegment)
       }
     </Container>
   );

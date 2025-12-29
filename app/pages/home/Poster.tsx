@@ -28,15 +28,15 @@ const Name = styled.div`
 `;
 
 type Props = {
-  data: PosterData;
+  value: PosterData;
 };
 
-const Poster = ({data}: Props) => {
+const Poster = ({value}: Props) => {
   return (
     <Container>
-      <Name>{data.name}</Name>
-      <Birthday>{data.birthday.format('dddd D MMMM YYYY')}</Birthday>
-      <Graph data={data} />
+      <Name>{value.name}</Name>
+      <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
+      <Graph value={value} />
     </Container>
   );
 };

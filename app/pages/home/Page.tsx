@@ -21,7 +21,7 @@ const Page = () => {
 
   return (
     <main>
-      <Poster data={posterData} />
+      <Poster value={posterData} />
     </main>
   );
 };
