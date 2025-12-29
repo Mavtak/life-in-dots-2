@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from './GraphEntry';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
+import type PosterData from './PosterData';
 import type Selection from './Selection';
 
 const Container = styled.div`
@@ -24,7 +25,7 @@ const Container = styled.div`
 `;
 
 type Props = {
-  data: GraphEntry[];
+  data: PosterData;
 };
 
 const Graph = ({data}: Props) => {
@@ -104,7 +105,7 @@ const Graph = ({data}: Props) => {
   return (
     <Container ref={containerRef}>
       {
-        data.map(renderGraphSegment)
+        data.graphData.map(renderGraphSegment)
       }
     </Container>
   );

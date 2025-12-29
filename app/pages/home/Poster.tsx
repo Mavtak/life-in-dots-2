@@ -36,7 +36,7 @@ const Poster = ({data}: Props) => {
     <Container>
       <Name>{data.name}</Name>
       <Birthday>{data.birthday.format('dddd D MMMM YYYY')}</Birthday>
-      <Graph data={data.graphData} />
+      <Graph data={data} />
     </Container>
   );
 };
