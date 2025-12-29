@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from './GraphEntry';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
+import type Selection from './Selection';
 
 const Container = styled.div`
   width: 100%;
@@ -29,10 +30,7 @@ type Props = {
 const Graph = ({data}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [selection, setSelection] = useState<{
-    endWeek: number,
-    startWeek: number,
-  } | null>(null);
+  const [selection, setSelection] = useState<Selection | null>(null);
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
 
   const handleClearSelection = useCallback(() => {
