@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useMemo } from "react";
+import { useState } from "react";
 import getPosterData from "./getPosterData";
 import Poster from "./Poster";
 
@@ -19,11 +19,11 @@ const getDefaultPosterData = () => {
 };
 
 const Page = () => {
-  const posterData = useMemo(() => getDefaultPosterData(), []);
+  const [posterData, setPosterData] = useState(getDefaultPosterData);
 
   return (
     <main>
-      <Poster value={posterData} />
+      <Poster onUpdate={setPosterData} value={posterData} />
     </main>
   );
 };

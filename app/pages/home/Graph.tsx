@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import type GraphEntry from './GraphEntry';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
 import type PosterData from './PosterData';
-import type Selection from './Selection';
 
 const Container = styled.div`
   width: 100%;
@@ -25,18 +24,24 @@ const Container = styled.div`
 `;
 
 type Props = {
+  onUpdate: (newValue: PosterData) => void;
   value: PosterData;
 };
 
-const Graph = ({value}: Props) => {
+const Graph = ({
+  onUpdate,
+  value,
+}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [selection, setSelection] = useState<Selection | null>(null);
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
 
   const handleClearSelection = useCallback(() => {
-    setSelection(null);
-  }, []);
+    onUpdate({
+      ...value,
+      selection: null,
+    });;
+  }, [onUpdate, value]);
 
   const handleSelectionEnd = useCallback(() => {
     setIsSelecting(false);
@@ -68,6 +73,7 @@ const Graph = ({value}: Props) => {
   }, [handleClearSelection]);
 
   const renderGraphSegment = (entry: GraphEntry) => {
+    const selection = value.selection;
     const isSelected = !!selection
           && entry.weekNumber >= Math.min(selection.startWeek, selection.endWeek)
           && entry.weekNumber <= Math.max(selection.startWeek, selection.endWeek);
@@ -77,17 +83,28 @@ const Graph = ({value}: Props) => {
         return;
       }
 
-      setSelection({
+      const newSelection = {
         ...selection,
         endWeek: entry.weekNumber,
+      };
+
+      onUpdate({
+        ...value,
+        selection: newSelection,
       });
     };
 
     const handleSelectionStart = () => {
       setIsSelecting(true);
-      setSelection({
+
+      const newSelection = {
         endWeek: entry.weekNumber,
         startWeek: entry.weekNumber,
+      };
+
+      onUpdate({
+        ...value,
+        selection: newSelection,
       });
     };
 

@@ -38,6 +38,7 @@ const getLifeInDotsData = ({
         birthday,
         graphData,
         name,
+        selection: null,
       };
 
       return result;

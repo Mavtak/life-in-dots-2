@@ -28,15 +28,19 @@ const Name = styled.div`
 `;
 
 type Props = {
+  onUpdate: (newValue: PosterData) => void;
   value: PosterData;
 };
 
-const Poster = ({value}: Props) => {
+const Poster = ({
+  onUpdate,
+  value,
+}: Props) => {
   return (
     <Container>
       <Name>{value.name}</Name>
       <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
-      <Graph value={value} />
+      <Graph onUpdate={onUpdate} value={value} />
     </Container>
   );
 };
