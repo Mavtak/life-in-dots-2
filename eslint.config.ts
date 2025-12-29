@@ -31,6 +31,7 @@ export default defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       'no-empty-pattern': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   {
