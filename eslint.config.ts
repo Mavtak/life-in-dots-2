@@ -39,6 +39,7 @@ export default defineConfig([
       'indent': ['error', 2],
       'no-trailing-spaces': ['error'],
       'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
     },
   },
 ]);
