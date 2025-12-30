@@ -1,27 +1,12 @@
-import moment from "moment";
-import { useMemo } from "react";
-import getPosterData from "./getPosterData";
 import Poster from "./Poster";
+import usePosterData from "./usePosterData";
 
 const Page = () => {
-  const posterData = useMemo(() => {
-    const birthday = moment('1989-10-05');
-    const name = 'David';
-    const now = moment();
-
-    const result =  getPosterData({
-      birthday,
-      maxAge: 90,
-      now,
-      name,
-    });
-
-    return result;
-  }, []);
+  const [posterData, setPosterData] = usePosterData();
 
   return (
     <main>
-      <Poster data={posterData} />
+      <Poster onUpdate={setPosterData} value={posterData} />
     </main>
   );
 };

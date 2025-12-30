@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import type { GraphEntry } from './getPosterData';
+import type GraphEntry from './GraphEntry';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
+import type PosterData from './PosterData';
 
 const Container = styled.div`
   width: 100%;
@@ -23,21 +24,24 @@ const Container = styled.div`
 `;
 
 type Props = {
-  data: GraphEntry[];
+  onUpdate: (newValue: PosterData) => void;
+  value: PosterData;
 };
 
-const Graph = ({data}: Props) => {
+const Graph = ({
+  onUpdate,
+  value,
+}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [selection, setSelection] = useState<{
-    endWeek: number,
-    startWeek: number,
-  } | null>(null);
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
 
   const handleClearSelection = useCallback(() => {
-    setSelection(null);
-  }, []);
+    onUpdate({
+      ...value,
+      selection: null,
+    });;
+  }, [onUpdate, value]);
 
   const handleSelectionEnd = useCallback(() => {
     setIsSelecting(false);
@@ -69,6 +73,7 @@ const Graph = ({data}: Props) => {
   }, [handleClearSelection]);
 
   const renderGraphSegment = (entry: GraphEntry) => {
+    const selection = value.selection;
     const isSelected = !!selection
           && entry.weekNumber >= Math.min(selection.startWeek, selection.endWeek)
           && entry.weekNumber <= Math.max(selection.startWeek, selection.endWeek);
@@ -78,27 +83,38 @@ const Graph = ({data}: Props) => {
         return;
       }
 
-      setSelection({
+      const newSelection = {
         ...selection,
         endWeek: entry.weekNumber,
+      };
+
+      onUpdate({
+        ...value,
+        selection: newSelection,
       });
     };
 
     const handleSelectionStart = () => {
       setIsSelecting(true);
-      setSelection({
+
+      const newSelection = {
         endWeek: entry.weekNumber,
         startWeek: entry.weekNumber,
+      };
+
+      onUpdate({
+        ...value,
+        selection: newSelection,
       });
     };
 
     return (
       <GraphSegment
-        data={entry}
         isSelected={isSelected}
         onSelectionContinue={handleSelectionContinue}
         onSelectionStart={handleSelectionStart}
         key={entry.weekNumber}
+        value={entry}
       />
     );
   };
@@ -106,7 +122,7 @@ const Graph = ({data}: Props) => {
   return (
     <Container ref={containerRef}>
       {
-        data.map(renderGraphSegment)
+        value.graphData.map(renderGraphSegment)
       }
     </Container>
   );

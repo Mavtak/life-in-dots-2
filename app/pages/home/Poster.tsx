@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import type { PosterData } from "./getPosterData";
 import Graph from "./Graph";
+import type PosterData from "./PosterData";
 
 const Container = styled.div`
   display: flex;
@@ -28,15 +28,19 @@ const Name = styled.div`
 `;
 
 type Props = {
-  data: PosterData;
+  onUpdate: (newValue: PosterData) => void;
+  value: PosterData;
 };
 
-const Poster = ({data}: Props) => {
+const Poster = ({
+  onUpdate,
+  value,
+}: Props) => {
   return (
     <Container>
-      <Name>{data.name}</Name>
-      <Birthday>{data.birthday.format('dddd D MMMM YYYY')}</Birthday>
-      <Graph data={data.graphData} />
+      <Name>{value.name}</Name>
+      <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
+      <Graph onUpdate={onUpdate} value={value} />
     </Container>
   );
 };
