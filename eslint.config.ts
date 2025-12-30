@@ -36,6 +36,7 @@ export default defineConfig([
   },
   {
     rules: {
+      'eol-last': 'error',
       'indent': ['error', 2],
       'no-trailing-spaces': ['error'],
       'semi': ['error', 'always'],
