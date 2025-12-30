@@ -1,5 +1,5 @@
-import type { Config } from "@react-router/dev/config";
-import { env } from "process";
+import type { Config } from '@react-router/dev/config';
+import { env } from 'process';
 
 export default {
   // Config options...

@@ -1,7 +1,7 @@
-import moment from "moment";
-import useStoredState from "~/utils/useStoredState";
-import getPosterData from "./getPosterData";
-import type PosterData from "./PosterData";
+import moment from 'moment';
+import useStoredState from '~/utils/useStoredState';
+import getPosterData from './getPosterData';
+import type PosterData from './PosterData';
 
 const convertPosterDataFromDeserializedValue = (deserializedValue: any) => {
   const result: PosterData = {

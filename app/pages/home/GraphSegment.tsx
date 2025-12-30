@@ -1,12 +1,12 @@
-import { useCallback, useRef, type PointerEventHandler } from 'react';
+import { type PointerEventHandler, useCallback, useRef } from 'react';
 import styled from 'styled-components';
-import type GraphEntry from './GraphEntry';
+import type GraphEntry from '~/data/GraphEntry';
 
 export const sizePx = 12;
 
 const Container = styled.div<{
-  value: GraphEntry,
-  isSelected: boolean,
+  $value: GraphEntry,
+  $isSelected: boolean,
 }>`
   display: flex;
   align-items: center;
@@ -21,32 +21,32 @@ const Container = styled.div<{
   height: var(--size);
   font-size: var(--size);
 
-  ${({value}) => value.isBirthWeek && `
+  ${({$value}) => $value.isBirthWeek && `
     font-weight: 700;
   `}
 
-  ${({value}) => !value.isBirthWeek && `
+  ${({$value}) => !$value.isBirthWeek && `
     font-size: calc(var(--size) * 2);
   `}
 
-  ${({value}) => value.hasPassed && !value.isBirthWeek && `
+  ${({$value}) => $value.hasPassed && !$value.isBirthWeek && `
     color: #aaaaaa;
     font-size: calc(var(--size) * 1.5);
   `}
   
-  ${({value}) => value.hasPassed && value.isBirthWeek && `
+  ${({$value}) => $value.hasPassed && $value.isBirthWeek && `
     color: #555555;
   `}
 
-  ${({value}) =>  !value.hasPassed  && !value.isBirthWeek && `
+  ${({$value}) =>  !$value.hasPassed  && !$value.isBirthWeek && `
     color: #444444;
   `}
 
-  ${({value}) =>  !value.hasPassed  && value.isBirthWeek && `
+  ${({$value}) =>  !$value.hasPassed  && $value.isBirthWeek && `
     color: #000000;
   `}
 
-  ${({isSelected}) => isSelected && `
+  ${({$isSelected}) => $isSelected && `
     background-color: orangered;
   `}
 `;
@@ -78,19 +78,19 @@ const GraphSegment = ({
     }
 
     if (value.hasPassed) {
-      return "×";
+      return '×';
     }
 
-    return "∙";
+    return '∙';
   };
 
   return (
     <Container
-      isSelected={isSelected}
+      $isSelected={isSelected}
+      $value={value}
       onPointerMove={onSelectionContinue}
       onPointerDown={handlePointerDown}
       ref={containerRef}
-      value={value}
     >
       {renderValue()}
     </Container>

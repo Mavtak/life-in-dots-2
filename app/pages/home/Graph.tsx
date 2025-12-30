@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import type GraphEntry from './GraphEntry';
+import type GraphEntry from '~/data/GraphEntry';
+import type PosterData from '~/data/PosterData';
 import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
-import type PosterData from './PosterData';
 
 const Container = styled.div`
   width: 100%;
