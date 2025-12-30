@@ -1,6 +1,6 @@
 import { useCallback, useRef, type PointerEventHandler } from 'react';
 import styled from 'styled-components';
-import type GraphEntry from './GraphEntry';
+import type GraphEntry from '~/data/GraphEntry';
 
 export const sizePx = 12;
 
