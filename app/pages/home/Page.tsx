@@ -1,5 +1,5 @@
-import Poster from "./Poster";
-import usePosterData from "./usePosterData";
+import Poster from './Poster';
+import usePosterData from './usePosterData';
 
 const Page = () => {
   const [posterData, setPosterData] = usePosterData();

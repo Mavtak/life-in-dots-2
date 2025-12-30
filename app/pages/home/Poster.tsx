@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Graph from "./Graph";
-import type PosterData from "./PosterData";
+import styled from 'styled-components';
+import Graph from './Graph';
+import type PosterData from './PosterData';
 
 const Container = styled.div`
   display: flex;

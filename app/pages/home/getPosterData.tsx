@@ -1,6 +1,6 @@
-import moment, { type Moment } from "moment";
-import type PosterData from "./PosterData";
-import type GraphEntry from "./GraphEntry";
+import moment, { type Moment } from 'moment';
+import type PosterData from './PosterData';
+import type GraphEntry from './GraphEntry';
 
 type Input = {
   birthday: Moment;

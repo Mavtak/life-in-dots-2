@@ -78,10 +78,10 @@ const GraphSegment = ({
     }
 
     if (value.hasPassed) {
-      return "×";
+      return '×';
     }
 
-    return "∙";
+    return '∙';
   };
 
   return (
