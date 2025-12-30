@@ -1,4 +1,4 @@
-import { useCallback, useRef, type PointerEventHandler } from 'react';
+import { type PointerEventHandler, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 
