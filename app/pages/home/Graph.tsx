@@ -110,11 +110,11 @@ const Graph = ({
 
     return (
       <GraphSegment
-        data={entry}
         isSelected={isSelected}
         onSelectionContinue={handleSelectionContinue}
         onSelectionStart={handleSelectionStart}
         key={entry.weekNumber}
+        value={entry}
       />
     );
   };

@@ -5,7 +5,7 @@ import type GraphEntry from './GraphEntry';
 export const sizePx = 12;
 
 const Container = styled.div<{
-  data: GraphEntry,
+  value: GraphEntry,
   isSelected: boolean,
 }>`
   display: flex;
@@ -21,28 +21,28 @@ const Container = styled.div<{
   height: var(--size);
   font-size: var(--size);
 
-  ${({data}) => data.isBirthWeek && `
+  ${({value}) => value.isBirthWeek && `
     font-weight: 700;
   `}
 
-  ${({data}) => !data.isBirthWeek && `
+  ${({value}) => !value.isBirthWeek && `
     font-size: calc(var(--size) * 2);
   `}
 
-  ${({data}) => data.hasPassed && !data.isBirthWeek && `
+  ${({value}) => value.hasPassed && !value.isBirthWeek && `
     color: #aaaaaa;
     font-size: calc(var(--size) * 1.5);
   `}
   
-  ${({data}) => data.hasPassed && data.isBirthWeek && `
+  ${({value}) => value.hasPassed && value.isBirthWeek && `
     color: #555555;
   `}
 
-  ${({data}) =>  !data.hasPassed  && !data.isBirthWeek && `
+  ${({value}) =>  !value.hasPassed  && !value.isBirthWeek && `
     color: #444444;
   `}
 
-  ${({data}) =>  !data.hasPassed  && data.isBirthWeek && `
+  ${({value}) =>  !value.hasPassed  && value.isBirthWeek && `
     color: #000000;
   `}
 
@@ -52,17 +52,17 @@ const Container = styled.div<{
 `;
 
 type Props = {
-  data: GraphEntry,
   isSelected: boolean,
   onSelectionContinue: () => void,
   onSelectionStart: () => void,
+  value: GraphEntry,
 };
 
 const GraphSegment = ({
-  data,
   isSelected,
   onSelectionContinue,
   onSelectionStart,
+  value,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -73,11 +73,11 @@ const GraphSegment = ({
   }, [onSelectionStart]);
 
   const renderValue = () => {
-    if (data.isBirthWeek) {
-      return String(data.age);
+    if (value.isBirthWeek) {
+      return String(value.age);
     }
 
-    if (data.hasPassed) {
+    if (value.hasPassed) {
       return "×";
     }
 
@@ -86,11 +86,11 @@ const GraphSegment = ({
 
   return (
     <Container
-      data={data}
       isSelected={isSelected}
       onPointerMove={onSelectionContinue}
       onPointerDown={handlePointerDown}
       ref={containerRef}
+      value={value}
     >
       {renderValue()}
     </Container>
