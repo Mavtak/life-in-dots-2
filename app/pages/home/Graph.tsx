@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 import type PosterData from '~/data/PosterData';
@@ -36,15 +36,6 @@ const Graph = ({
   onUpdate,
   value,
 }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleClearSelection = useCallback(() => {
-    onUpdate({
-      ...value,
-      selection: null,
-    });;
-  }, [onUpdate, value]);
-
   const handleSelectionEnd = useCallback(() => {
     onChangeIsSelecting(false);
   }, [onChangeIsSelecting]);
@@ -54,25 +45,6 @@ const Graph = ({
 
     return () => document.removeEventListener('pointerup', handleSelectionEnd);
   }, [handleSelectionEnd]);
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-
-      if (!containerRef.current) {
-        return null;
-      }
-
-      if (containerRef.current.contains(event.target as HTMLElement)){
-        return;
-      }
-
-      handleClearSelection();
-    };
-
-    document.addEventListener('pointerdown', handlePointerDown);
-
-    return () => document.removeEventListener('pointerdown', handlePointerDown);
-  }, [handleClearSelection]);
 
   const renderGraphSegment = (entry: GraphEntry) => {
     const selection = value.selection;
@@ -97,7 +69,9 @@ const Graph = ({
     };
 
     const handleSelectionStart = () => {
-      onChangeIsSelecting(true);
+      if (!isSelecting) {
+        return;
+      }
 
       const newSelection = {
         endWeek: entry.weekNumber,
@@ -122,7 +96,7 @@ const Graph = ({
   };
 
   return (
-    <Container ref={containerRef}>
+    <Container>
       {
         value.graphData.map(renderGraphSegment)
       }
