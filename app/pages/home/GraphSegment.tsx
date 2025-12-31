@@ -7,12 +7,15 @@ export const sizePx = 12;
 const Container = styled.div<{
   $value: GraphEntry,
   $isSelected: boolean,
+  $isSelecting: boolean,
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  touch-action: none;
+  ${({$isSelecting}) => $isSelecting && `
+    touch-action: none;
+  `}
   user-select: none;
 
   --size: ${sizePx}px;
@@ -53,6 +56,7 @@ const Container = styled.div<{
 
 type Props = {
   isSelected: boolean,
+  isSelecting: boolean,
   onSelectionContinue: () => void,
   onSelectionStart: () => void,
   value: GraphEntry,
@@ -60,6 +64,7 @@ type Props = {
 
 const GraphSegment = ({
   isSelected,
+  isSelecting,
   onSelectionContinue,
   onSelectionStart,
   value,
@@ -87,6 +92,7 @@ const GraphSegment = ({
   return (
     <Container
       $isSelected={isSelected}
+      $isSelecting={isSelecting}
       $value={value}
       onPointerMove={onSelectionContinue}
       onPointerDown={handlePointerDown}

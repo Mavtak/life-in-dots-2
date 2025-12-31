@@ -87,6 +87,7 @@ const Graph = ({
     return (
       <GraphSegment
         isSelected={isSelected}
+        isSelecting={isSelecting}
         onSelectionContinue={handleSelectionContinue}
         onSelectionStart={handleSelectionStart}
         key={entry.weekNumber}
