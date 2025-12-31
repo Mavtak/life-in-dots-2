@@ -7,6 +7,7 @@ import {
   isRouteErrorResponse,
 } from 'react-router';
 import type { Route } from './+types/root';
+import BodyStickyFrames from './BodyStickyFrames';
 import GlobalStyles from './GlobalStyles';
 import NestComponents from './utils/NestComponents';
 import StickyFrameProvider from './utils/stickyFrames/StickyFrameProvider';
@@ -31,6 +32,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           ]}
         >
           {children}
+          <BodyStickyFrames />
         </NestComponents>
         <ScrollRestoration />
         <Scripts />
