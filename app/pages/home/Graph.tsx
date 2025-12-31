@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 import type PosterData from '~/data/PosterData';
@@ -24,17 +24,19 @@ const Container = styled.div`
 `;
 
 type Props = {
+  isSelecting: boolean;
+  onChangeIsSelecting: (newIsSelecting: boolean) => void;
   onUpdate: (newValue: PosterData) => void;
   value: PosterData;
 };
 
 const Graph = ({
+  isSelecting,
+  onChangeIsSelecting,
   onUpdate,
   value,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const [isSelecting, setIsSelecting] = useState<boolean>(false);
 
   const handleClearSelection = useCallback(() => {
     onUpdate({
@@ -44,8 +46,8 @@ const Graph = ({
   }, [onUpdate, value]);
 
   const handleSelectionEnd = useCallback(() => {
-    setIsSelecting(false);
-  }, []);
+    onChangeIsSelecting(false);
+  }, [onChangeIsSelecting]);
 
   useEffect(() => {
     document.addEventListener('pointerup', handleSelectionEnd);
@@ -95,7 +97,7 @@ const Graph = ({
     };
 
     const handleSelectionStart = () => {
-      setIsSelecting(true);
+      onChangeIsSelecting(true);
 
       const newSelection = {
         endWeek: entry.weekNumber,
