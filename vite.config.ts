@@ -13,6 +13,9 @@ export default defineConfig({
       lintOnStart: true,
     }),
   ],
+  ssr: {
+    noExternal: ['styled-components']
+  },
   ...(env.APP_HTTP_BASE
     ? {
       base: env.APP_HTTP_BASE,

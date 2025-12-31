@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 import type PosterData from '~/data/PosterData';
@@ -24,53 +24,27 @@ const Container = styled.div`
 `;
 
 type Props = {
+  isSelecting: boolean;
+  onChangeIsSelecting: (newIsSelecting: boolean) => void;
   onUpdate: (newValue: PosterData) => void;
   value: PosterData;
 };
 
 const Graph = ({
+  isSelecting,
+  onChangeIsSelecting,
   onUpdate,
   value,
 }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const [isSelecting, setIsSelecting] = useState<boolean>(false);
-
-  const handleClearSelection = useCallback(() => {
-    onUpdate({
-      ...value,
-      selection: null,
-    });;
-  }, [onUpdate, value]);
-
   const handleSelectionEnd = useCallback(() => {
-    setIsSelecting(false);
-  }, []);
+    onChangeIsSelecting(false);
+  }, [onChangeIsSelecting]);
 
   useEffect(() => {
     document.addEventListener('pointerup', handleSelectionEnd);
 
     return () => document.removeEventListener('pointerup', handleSelectionEnd);
   }, [handleSelectionEnd]);
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-
-      if (!containerRef.current) {
-        return null;
-      }
-
-      if (containerRef.current.contains(event.target as HTMLElement)){
-        return;
-      }
-
-      handleClearSelection();
-    };
-
-    document.addEventListener('pointerdown', handlePointerDown);
-
-    return () => document.removeEventListener('pointerdown', handlePointerDown);
-  }, [handleClearSelection]);
 
   const renderGraphSegment = (entry: GraphEntry) => {
     const selection = value.selection;
@@ -95,7 +69,9 @@ const Graph = ({
     };
 
     const handleSelectionStart = () => {
-      setIsSelecting(true);
+      if (!isSelecting) {
+        return;
+      }
 
       const newSelection = {
         endWeek: entry.weekNumber,
@@ -111,6 +87,7 @@ const Graph = ({
     return (
       <GraphSegment
         isSelected={isSelected}
+        isSelecting={isSelecting}
         onSelectionContinue={handleSelectionContinue}
         onSelectionStart={handleSelectionStart}
         key={entry.weekNumber}
@@ -120,7 +97,7 @@ const Graph = ({
   };
 
   return (
-    <Container ref={containerRef}>
+    <Container>
       {
         value.graphData.map(renderGraphSegment)
       }

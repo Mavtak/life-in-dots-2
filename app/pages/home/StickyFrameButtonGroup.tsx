@@ -1,0 +1,32 @@
+import type { ReactNode } from 'react';
+import styled from 'styled-components';
+import ButtonGroup from './ButtonGroup';
+import StickyFrameContent from '~/utils/stickyFrames/StickyFrameContent';
+
+const Container = styled(ButtonGroup)`
+  background-color: white;
+  padding: 20px;
+  border-top: 1px solid black;
+`;
+
+type Props = {
+  children: ReactNode;
+  target: string;
+}
+
+const StickyFrameButtonGroup = ({
+  children,
+  target,
+}: Props) => {
+  return (
+    <StickyFrameContent target={target}>
+      <Container>
+        <ButtonGroup>
+          {children}
+        </ButtonGroup>
+      </Container>
+    </StickyFrameContent>
+  );
+};
+
+export default StickyFrameButtonGroup;
