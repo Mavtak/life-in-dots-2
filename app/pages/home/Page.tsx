@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import usePosterData from '~/data/usePosterData';
-import Poster from './Poster';
 import Button from './Button';
-import ButtonGroup from './ButtonGroup';
+import Poster from './Poster';
+import StickyFrameButtonGroup from './StickyFrameButtonGroup';
 
 const Container = styled.main`
   display: flex;
@@ -53,10 +53,10 @@ const Page = () => {
     };
 
     return (
-      <ButtonGroup>
+      <StickyFrameButtonGroup target="content-bottom">
         {renderMakeSelectionButton()}
         {renderClearSelectionButton()}
-      </ButtonGroup>
+      </StickyFrameButtonGroup>
     );
 
   };
