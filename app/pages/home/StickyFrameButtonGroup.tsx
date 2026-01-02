@@ -7,6 +7,9 @@ const Container = styled(ButtonGroup)`
   background-color: white;
   padding: 20px;
   border-top: 1px solid black;
+
+  width: 100%;
+  overflow-y: auto;
 `;
 
 type Props = {
