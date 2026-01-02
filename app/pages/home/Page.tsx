@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import usePosterData from '~/data/usePosterData';
-import Button from './Button';
 import Poster from './Poster';
-import StickyFrameButtonGroup from './StickyFrameButtonGroup';
+import Controls from './Controls';
 
 const Container = styled.main`
   display: flex;
@@ -15,51 +14,6 @@ const Page = () => {
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
   const [posterData, setPosterData] = usePosterData();
 
-  const renderControls = () => {
-    const renderMakeSelectionButton = () => {
-      const handlePress = () => {
-        setIsSelecting(true);
-        setPosterData({
-          ...posterData,
-          selection: null,
-        });
-      };
-
-      return (
-        <Button
-          isDisabled={isSelecting}
-          label="Make Selection"
-          onPress={handlePress}
-        />
-      );
-    };
-
-    const renderClearSelectionButton = () => {
-      const handlePress = () => {
-        setIsSelecting(false);
-        setPosterData({
-          ...posterData,
-          selection: null,
-        });
-      };
-
-      return (
-        <Button
-          isDisabled={isSelecting || !posterData.selection}
-          label="Clear Selection"
-          onPress={handlePress}
-        />
-      );
-    };
-
-    return (
-      <StickyFrameButtonGroup target="content-bottom">
-        {renderMakeSelectionButton()}
-        {renderClearSelectionButton()}
-      </StickyFrameButtonGroup>
-    );
-
-  };
   return (
     <Container>
       <Poster
@@ -68,7 +22,12 @@ const Page = () => {
         onUpdate={setPosterData}
         value={posterData}
       />
-      {renderControls()}
+      <Controls
+        isSelecting={isSelecting}
+        onChangeIsSelecting={setIsSelecting}
+        onUpdatePosterData={setPosterData}
+        posterData={posterData}
+      />
     </Container>
   );
 };
