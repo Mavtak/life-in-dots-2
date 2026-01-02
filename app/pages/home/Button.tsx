@@ -12,6 +12,8 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 20px;
 
+  white-space: nowrap;
+
   &:active {
     background-color: orangered;
   }
