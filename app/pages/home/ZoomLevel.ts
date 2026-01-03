@@ -1,4 +1,4 @@
-import type ZoomLevels from "./zoomLevels";
+import type ZoomLevels from './zoomLevels';
 
 type ZoomLevel = typeof ZoomLevels[number];
 
