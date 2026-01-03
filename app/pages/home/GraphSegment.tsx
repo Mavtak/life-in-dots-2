@@ -2,7 +2,7 @@ import { type PointerEventHandler, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 
-export const sizePx = 12;
+export const getSizePx = () => 12;
 
 const Container = styled.div<{
   $value: GraphEntry,
@@ -18,7 +18,7 @@ const Container = styled.div<{
   `}
   user-select: none;
 
-  --size: ${sizePx}px;
+  --size: ${getSizePx()}px;
 
   width: var(--size);
   height: var(--size);
