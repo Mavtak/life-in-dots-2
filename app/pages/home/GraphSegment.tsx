@@ -52,20 +52,20 @@ const Container = styled.div<{
   `}
 
   ${({$value}) => $value.hasPassed && !$value.isBirthWeek && `
-    color: #aaaaaa;
+    color: #222222;
     font-size: calc(var(--size) * 1.5);
   `}
   
   ${({$value}) => $value.hasPassed && $value.isBirthWeek && `
-    color: #555555;
+    color: #000000;
   `}
 
   ${({$value}) =>  !$value.hasPassed  && !$value.isBirthWeek && `
-    color: #444444;
+    color: #333333;
   `}
 
   ${({$value}) =>  !$value.hasPassed  && $value.isBirthWeek && `
-    color: #000000;
+    color: #111111;
   `}
 
   ${({$isSelected}) => $isSelected && `
