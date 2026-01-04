@@ -1,12 +1,37 @@
 import styled from 'styled-components';
 import type PosterData from '~/data/PosterData';
 import Graph from './Graph';
+import type ZoomLevel from './ZoomLevel';
 
-const Container = styled.div`
+const getMaxWidthPx = (zoomLevel: ZoomLevel) : number => {
+  switch(zoomLevel) {
+  case 'extra-small':
+    return 600;
+
+  case 'small':
+    return 800;
+
+  case 'regular':
+    return 1000;
+
+  case 'large':
+    return 1250;
+
+  case 'extra large':
+    return 1750;
+  }
+};
+
+const Container = styled.div<{
+  $zoomLevel: ZoomLevel;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+
+  width: 100%;
+  max-width: ${({$zoomLevel}) => getMaxWidthPx($zoomLevel)}px;
 
   background-color: #4d007f;
   color: white;
@@ -32,6 +57,7 @@ type Props = {
   onChangeIsSelecting: (newIsSelecting: boolean) => void;
   onUpdate: (newValue: PosterData) => void;
   value: PosterData;
+  zoomLevel: ZoomLevel,
 };
 
 const Poster = ({
@@ -39,9 +65,12 @@ const Poster = ({
   onChangeIsSelecting,
   onUpdate,
   value,
+  zoomLevel,
 }: Props) => {
   return (
-    <Container>
+    <Container
+      $zoomLevel={zoomLevel}
+    >
       <Name>{value.name}</Name>
       <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
       <Graph
@@ -49,6 +78,7 @@ const Poster = ({
         onChangeIsSelecting={onChangeIsSelecting}
         onUpdate={onUpdate}
         value={value}
+        zoomLevel={zoomLevel}
       />
     </Container>
   );

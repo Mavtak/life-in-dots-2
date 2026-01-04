@@ -4,7 +4,8 @@ const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export default ButtonGroup;

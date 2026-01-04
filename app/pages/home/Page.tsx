@@ -1,65 +1,22 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import usePosterData from '~/data/usePosterData';
-import Button from './Button';
 import Poster from './Poster';
-import StickyFrameButtonGroup from './StickyFrameButtonGroup';
+import Controls from './Controls';
+import useZoomLevel from '~/data/useZoomLevel';
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 `;
 
 const Page = () => {
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
   const [posterData, setPosterData] = usePosterData();
+  const [zoomLevel, setZoomLevel] = useZoomLevel();
 
-  const renderControls = () => {
-    const renderMakeSelectionButton = () => {
-      const handlePress = () => {
-        setIsSelecting(true);
-        setPosterData({
-          ...posterData,
-          selection: null,
-        });
-      };
-
-      return (
-        <Button
-          isDisabled={isSelecting}
-          label="Make Selection"
-          onPress={handlePress}
-        />
-      );
-    };
-
-    const renderClearSelectionButton = () => {
-      const handlePress = () => {
-        setIsSelecting(false);
-        setPosterData({
-          ...posterData,
-          selection: null,
-        });
-      };
-
-      return (
-        <Button
-          isDisabled={isSelecting || !posterData.selection}
-          label="Clear Selection"
-          onPress={handlePress}
-        />
-      );
-    };
-
-    return (
-      <StickyFrameButtonGroup target="content-bottom">
-        {renderMakeSelectionButton()}
-        {renderClearSelectionButton()}
-      </StickyFrameButtonGroup>
-    );
-
-  };
   return (
     <Container>
       <Poster
@@ -67,8 +24,16 @@ const Page = () => {
         onChangeIsSelecting={setIsSelecting}
         onUpdate={setPosterData}
         value={posterData}
+        zoomLevel={zoomLevel}
       />
-      {renderControls()}
+      <Controls
+        isSelecting={isSelecting}
+        onChangeIsSelecting={setIsSelecting}
+        onChangeZoomLevel={setZoomLevel}
+        onUpdatePosterData={setPosterData}
+        posterData={posterData}
+        zoomLevel={zoomLevel}
+      />
     </Container>
   );
 };

@@ -2,19 +2,22 @@ import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
 import type PosterData from '~/data/PosterData';
-import GraphSegment, { sizePx as graphSegmentSizePx } from './GraphSegment';
+import GraphSegment, { getSizePx as getGraphSegmentSizePx } from './GraphSegment';
+import type ZoomLevel from './ZoomLevel';
 
-const Container = styled.div`
+const Container = styled.div<{
+  $zoomLevel: ZoomLevel,
+}>`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill,  minmax(${graphSegmentSizePx}px, 1fr));
+  grid-template-columns: repeat(auto-fill,  minmax(${({$zoomLevel}) => getGraphSegmentSizePx($zoomLevel)}px, 1fr));
   
   background-color: white;
   padding: 12px;
 
   --extra-side-padding: calc(
     100%
-    - round(down, 100% - 12px*2, ${graphSegmentSizePx}px)
+    - round(down, 100% - 12px*2, ${({$zoomLevel}) => getGraphSegmentSizePx($zoomLevel)}px)
   );
 
   padding-left: calc(var(--extra-side-padding) / 2);
@@ -28,6 +31,7 @@ type Props = {
   onChangeIsSelecting: (newIsSelecting: boolean) => void;
   onUpdate: (newValue: PosterData) => void;
   value: PosterData;
+  zoomLevel: ZoomLevel,
 };
 
 const Graph = ({
@@ -35,6 +39,7 @@ const Graph = ({
   onChangeIsSelecting,
   onUpdate,
   value,
+  zoomLevel,
 }: Props) => {
   const handleSelectionEnd = useCallback(() => {
     onChangeIsSelecting(false);
@@ -92,12 +97,15 @@ const Graph = ({
         onSelectionStart={handleSelectionStart}
         key={entry.weekNumber}
         value={entry}
+        zoomLevel={zoomLevel}
       />
     );
   };
 
   return (
-    <Container>
+    <Container
+      $zoomLevel={zoomLevel}
+    >
       {
         value.graphData.map(renderGraphSegment)
       }
