@@ -8,6 +8,9 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
 
+  width: 100%;
+  max-width: 1000px;
+
   background-color: #4d007f;
   color: white;
   padding: 8px;
