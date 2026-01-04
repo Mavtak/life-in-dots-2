@@ -1,19 +1,26 @@
 import type PosterData from '~/data/PosterData';
 import Button from './Button';
 import StickyFrameButtonGroup from './StickyFrameButtonGroup';
+import ThreePartButton from './ThreePartButton';
+import type ZoomLevel from './ZoomLevel';
+import zoomLevels, { defaultZoomLevel } from './zoomLevels';
 
 type Props = {
   isSelecting: boolean;
   onChangeIsSelecting: (newIsSelecting: boolean) => void;
+  onChangeZoomLevel: (newZoomLevel: ZoomLevel) => void;
   onUpdatePosterData: (newPosterData: PosterData) => void;
   posterData: PosterData;
+  zoomLevel: ZoomLevel,
 }
 
 const Controls = ({
   isSelecting,
   onChangeIsSelecting,
+  onChangeZoomLevel,
   onUpdatePosterData,
   posterData,
+  zoomLevel
 }: Props) => {
   const renderMakeSelectionButton = () => {
     const handlePress = () => {
@@ -51,8 +58,42 @@ const Controls = ({
     );
   };
 
+  const renderZoomButton = () => {
+    const zoomLevelIndex = zoomLevels.indexOf(zoomLevel);
+
+    return (
+      <ThreePartButton
+        left={{
+          isDisabled: zoomLevelIndex === 0,
+          label: '-',
+          onPress: () => {
+            const newZoomLevel = zoomLevels[zoomLevelIndex - 1];
+
+            onChangeZoomLevel(newZoomLevel);
+          },
+        }}
+        middle={{
+          label: 'Zoom',
+          onPress: () => {
+            onChangeZoomLevel(defaultZoomLevel);
+          },
+        }}
+        right={{
+          isDisabled: zoomLevelIndex === zoomLevels.length - 1,
+          label: '+',
+          onPress: () => {
+            const newZoomLevel = zoomLevels[zoomLevelIndex + 1];
+
+            onChangeZoomLevel(newZoomLevel);
+          },
+        }}
+      />
+    );
+  };
+
   return (
     <StickyFrameButtonGroup target="content-bottom">
+      {renderZoomButton()}
       {renderMakeSelectionButton()}
       {renderClearSelectionButton()}
     </StickyFrameButtonGroup>

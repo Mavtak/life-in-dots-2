@@ -1,13 +1,32 @@
 import { type PointerEventHandler, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import type GraphEntry from '~/data/GraphEntry';
+import type ZoomLevel from './ZoomLevel';
 
-export const getSizePx = () => 12;
+export const getSizePx = (zoomLevel: ZoomLevel): number => {
+  switch(zoomLevel) {
+  case 'extra-small':
+    return 6;
+
+  case 'small':
+    return 8;
+
+  case 'regular':
+    return 12;
+
+  case 'large':
+    return 16;
+
+  case 'extra large':
+    return 22;
+  }
+};
 
 const Container = styled.div<{
   $value: GraphEntry,
   $isSelected: boolean,
   $isSelecting: boolean,
+  $zoomLevel: ZoomLevel,
 }>`
   display: flex;
   align-items: center;
@@ -18,7 +37,7 @@ const Container = styled.div<{
   `}
   user-select: none;
 
-  --size: ${getSizePx()}px;
+  --size: ${({$zoomLevel}) => getSizePx($zoomLevel)}px;
 
   width: var(--size);
   height: var(--size);
@@ -60,6 +79,7 @@ type Props = {
   onSelectionContinue: () => void,
   onSelectionStart: () => void,
   value: GraphEntry,
+  zoomLevel: ZoomLevel,
 };
 
 const GraphSegment = ({
@@ -68,6 +88,7 @@ const GraphSegment = ({
   onSelectionContinue,
   onSelectionStart,
   value,
+  zoomLevel,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -93,6 +114,7 @@ const GraphSegment = ({
     <Container
       $isSelected={isSelected}
       $isSelecting={isSelecting}
+      $zoomLevel={zoomLevel}
       $value={value}
       onPointerMove={onSelectionContinue}
       onPointerDown={handlePointerDown}

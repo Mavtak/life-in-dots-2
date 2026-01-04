@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import usePosterData from '~/data/usePosterData';
 import Poster from './Poster';
 import Controls from './Controls';
+import useZoomLevel from '~/data/useZoomLevel';
 
 const Container = styled.main`
   display: flex;
@@ -14,6 +15,7 @@ const Container = styled.main`
 const Page = () => {
   const [isSelecting, setIsSelecting] = useState<boolean>(false);
   const [posterData, setPosterData] = usePosterData();
+  const [zoomLevel, setZoomLevel] = useZoomLevel();
 
   return (
     <Container>
@@ -22,12 +24,15 @@ const Page = () => {
         onChangeIsSelecting={setIsSelecting}
         onUpdate={setPosterData}
         value={posterData}
+        zoomLevel={zoomLevel}
       />
       <Controls
         isSelecting={isSelecting}
         onChangeIsSelecting={setIsSelecting}
+        onChangeZoomLevel={setZoomLevel}
         onUpdatePosterData={setPosterData}
         posterData={posterData}
+        zoomLevel={zoomLevel}
       />
     </Container>
   );
