@@ -1,16 +1,44 @@
 import styled from 'styled-components';
+import LinkButton from './LinkButton';
+import useDevelopmentTools from './useDevelopmentTools';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
   background-color: #4d007f;
   padding: 8px;
   color: white;
   border-bottom: 1px solid black;
+
+  :first-child {
+    flex-grow: 1;
+  }
 `;
 
 const DevelopmentBanner = () => {
+  const developmentTools = useDevelopmentTools();
+
+  const renderCloseButton = () => {
+    const handlePress = () => {
+      developmentTools.banner.setIsOpen(false);
+    };
+
+    return (
+      <LinkButton
+        label="close"
+        onPress={handlePress}
+      />
+    );
+  };
+
   return (
     <Container>
-      development banner
+      <div>
+        development banner
+      </div>
+      {renderCloseButton()}
     </Container>
   );
 };
