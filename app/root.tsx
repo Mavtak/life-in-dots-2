@@ -11,6 +11,8 @@ import BodyStickyFrames from './BodyStickyFrames';
 import GlobalStyles from './GlobalStyles';
 import NestComponents from './utils/NestComponents';
 import StickyFrameProvider from './utils/stickyFrames/StickyFrameProvider';
+import DevelopmentToolsProvider from './developmentTools/DevelopmentToolsProvider';
+import DevelopmentBannerChecker from './developmentTools/DevelopmentBannerChecker';
 
 export const links: Route.LinksFunction = () => [
 ];
@@ -28,11 +30,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <NestComponents
           components={[
+            DevelopmentToolsProvider,
             StickyFrameProvider,
           ]}
         >
           {children}
           <BodyStickyFrames />
+          <DevelopmentBannerChecker />
         </NestComponents>
         <ScrollRestoration />
         <Scripts />

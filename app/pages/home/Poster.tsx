@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import type PosterData from '~/data/PosterData';
+import useFeatureFlag from '~/utils/featureFlags/useFeatureFlag';
 import Graph from './Graph';
 import type ZoomLevel from './ZoomLevel';
 
@@ -67,12 +68,15 @@ const Poster = ({
   value,
   zoomLevel,
 }: Props) => {
+  const isShowingBirthdayDayOfWeek = useFeatureFlag('Show Birthday Day Of Week');
+  const isShowingSparkles = useFeatureFlag('Sparkles');
+
   return (
     <Container
       $zoomLevel={zoomLevel}
     >
-      <Name>{value.name}</Name>
-      <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
+      <Name>{isShowingSparkles && '✨'}{value.name}{isShowingSparkles && '✨'}</Name>
+      <Birthday>{value.birthday.format(`${isShowingBirthdayDayOfWeek ? 'dddd ':''}D MMMM YYYY`)}</Birthday>
       <Graph
         isSelecting={isSelecting}
         onChangeIsSelecting={onChangeIsSelecting}
