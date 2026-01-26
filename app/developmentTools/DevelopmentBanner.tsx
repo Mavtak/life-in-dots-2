@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FeatureFlagControls from './FeatureFlagControls';
 import LinkButton from './LinkButton';
 import useDevelopmentTools from './useDevelopmentTools';
 
@@ -36,7 +37,7 @@ const DevelopmentBanner = () => {
   return (
     <Container>
       <div>
-        development banner
+        <FeatureFlagControls />
       </div>
       {renderCloseButton()}
     </Container>
