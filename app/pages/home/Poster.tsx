@@ -68,6 +68,7 @@ const Poster = ({
   value,
   zoomLevel,
 }: Props) => {
+  const isShowingBirthdayDayOfWeek = useFeatureFlag('Show Birthday Day Of Week');
   const isShowingSparkles = useFeatureFlag('Sparkles');
 
   return (
@@ -75,7 +76,7 @@ const Poster = ({
       $zoomLevel={zoomLevel}
     >
       <Name>{isShowingSparkles && '✨'}{value.name}{isShowingSparkles && '✨'}</Name>
-      <Birthday>{value.birthday.format('dddd D MMMM YYYY')}</Birthday>
+      <Birthday>{value.birthday.format(`${isShowingBirthdayDayOfWeek ? 'dddd ':''}D MMMM YYYY`)}</Birthday>
       <Graph
         isSelecting={isSelecting}
         onChangeIsSelecting={onChangeIsSelecting}
