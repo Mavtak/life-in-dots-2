@@ -16,10 +16,7 @@ const Container = styled.div`
     'bottom bottom  bottom';
 
   position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
 
   pointer-events: none;
 `;
