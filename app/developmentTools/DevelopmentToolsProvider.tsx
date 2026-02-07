@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import developmentToolsContext, { type ContextValue } from './developmentToolsContext';
+import useKeyboardShortcut from '~/utils/useKeyboardShortcut';
 
 type Props = {
   children: ReactNode;
@@ -8,24 +9,16 @@ type Props = {
 const DevelopmentToolsProvider = ({ children }: Props) => {
   const [isBannerOpen, setIsBannerOpen] = useState(false);
 
-  useEffect(() => {
-    const handleOnKeyDown = (event: KeyboardEvent) => {
-      const isMatch = event.ctrlKey && event.key === '`';
-
-      if (!isMatch) {
-        return;
-      }
-
-      event.preventDefault();
-
-      setIsBannerOpen((oldIsBannerOpen) => {
-        return !oldIsBannerOpen;
-      });
-    };
-
-    document.addEventListener('keydown', handleOnKeyDown);
-
-    return () => document.removeEventListener('keydown', handleOnKeyDown);
+  useKeyboardShortcut({
+    altKey: false,
+    ctrlKey: true,
+    key: '`',
+    metaKey: false,
+    shiftKey: false,
+  }, () => {
+    setIsBannerOpen((oldIsBannerOpen) => {
+      return !oldIsBannerOpen;
+    });
   });
 
   const contextValue = useMemo(() => {
