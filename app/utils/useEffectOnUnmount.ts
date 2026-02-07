@@ -4,12 +4,12 @@ import {
 } from 'react';
 
 const useEffectOnUnmount = (fun: () => void) => {
-  const funRef = useRef<() => void>(null);
+  const funRef = useRef<() => void>(fun);
 
   // eslint-disable-next-line
   funRef.current = fun;
 
-  useEffect(() => () => funRef.current!(), []);
+  useEffect(() => funRef.current, []);
 };
 
 export default useEffectOnUnmount;
