@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import Pill from '~/controls/Pill';
 import type FeatureFlagConfiguration from '~/utils/featureFlags/featureFlagConfiguration';
 import { featureFlagNames } from '~/utils/featureFlags/featureFlagConfiguration';
 import useFeatureFlagConfiguration from '~/utils/featureFlags/useFeatureFlagConfiguration';
 import useFeatureFlagOverrideValues from '~/utils/featureFlags/useFeatureFlagOverrideValues';
-import Pill from './Pill';
 
 const Container = styled.div`
   display: inline-flex;

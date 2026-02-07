@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+import LinkButton from '~/controls/LinkButton';
 import FeatureFlagControls from './FeatureFlagControls';
-import LinkButton from './LinkButton';
 import useDevelopmentTools from './useDevelopmentTools';
 
 const Container = styled.div`

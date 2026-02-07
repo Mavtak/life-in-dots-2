@@ -1,9 +1,9 @@
+import Button from '~/controls/Button';
+import ThreePartButton from '~/controls/ThreePartButton';
 import type PosterData from '~/data/PosterData';
-import Button from './Button';
-import StickyFrameButtonGroup from './StickyFrameButtonGroup';
-import ThreePartButton from './ThreePartButton';
 import type ZoomLevel from './ZoomLevel';
 import zoomLevels, { defaultZoomLevel } from './zoomLevels';
+import StickyFrameButtonGroup from '~/controls/StickyFrameButtonGroup';
 
 type Props = {
   isSelecting: boolean;

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
-import ButtonGroup from './ButtonGroup';
 import StickyFrameContent from '~/utils/stickyFrames/StickyFrameContent';
+import ButtonGroup from './ButtonGroup';
 
 const Container = styled(ButtonGroup)`
   background-color: white;
